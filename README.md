@@ -1,11 +1,11 @@
 # trigger_table
 
-- Buat Database
+#### Buat Database
 ```
 make database trigger_table
 ```
 
-- Buat Table `produk`
+#### Buat Table `produk`
 ```sql
 CREATE TABLE `produk` (
   `id` int(11) NOT NULL,
@@ -21,7 +21,7 @@ INSERT INTO `produk` (`id`, `kode_produk`, `nama_produk`, `harga`) VALUES
 (2, 'BR002', 'SEMINGGU JAGO PHP MYSQL', 80000);
 ```
 
-- Buat Table `log_harga_produk`
+#### Buat Table `log_harga_produk`
 ```sql
 CREATE TABLE `log_harga_produk` (
   `id` int(11) NOT NULL,
@@ -34,7 +34,7 @@ ALTER TABLE `log_harga_produk` ADD PRIMARY KEY (`id`);
 ALTER TABLE `log_harga_produk` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ```
 
-- Buat Trigger `before_produk_update`
+#### Buat Trigger `before_produk_update`
 ```sql
 DELIMITER $$
 CREATE TRIGGER `before_produk_update` 
@@ -58,7 +58,7 @@ DELIMITER ;
   - BEFORE DELETE – dijalankan sebelum proses delete data.
   - AFTER DELETE – dijalankan setelah proses delete data.
 
-- Coba Trigger
+#### Coba Trigger
 ```sql
 update produk set harga=90000 WHERE kode_produk='BR001';
 ```
@@ -66,19 +66,19 @@ update produk set harga=90000 WHERE kode_produk='BR001';
 select * from log_harga_produk;
 ```
 
-- Cara Menampilkan List Trigger
+#### Cara Menampilkan List Trigger
 ```sql
 SHOW TRIGGERS;
 ```
 
-- Cara Menghapus Trigger
+#### Cara Menghapus Trigger
 ```sql
 DROP TRIGGER nama_trigger ;
 //contoh implementasinya
 DROP TRIGGER before_produk_update ;
 ```
 
-- Test Dengan Delete
+#### Test Dengan Delete
 ```sql
 CREATE TABLE `produk_bc` (
   `id_delete` int(11) NOT NULL,
