@@ -77,7 +77,7 @@ DROP TRIGGER nama_trigger ;
 //contoh implementasinya
 DROP TRIGGER before_produk_update ;
 ```
-
+#
 #### Test Dengan Delete
 ```sql
 CREATE TABLE `produk_bc` (
