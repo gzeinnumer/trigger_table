@@ -78,6 +78,35 @@ DROP TRIGGER nama_trigger ;
 DROP TRIGGER before_produk_update ;
 ```
 
+- Test Dengan Delete
+```sql
+CREATE TABLE `produk_bc` (
+  `id_delete` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `kode_produk` varchar(6) NOT NULL,
+  `nama_produk` varchar(100) NOT NULL,
+  `harga` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `produk_bc`
+  ADD PRIMARY KEY (`id_delete`);
+ALTER TABLE `produk_bc`
+  MODIFY `id_delete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+```
+```sql
+DELIMITER $$
+CREATE TRIGGER after_produk_deleted 
+    AFTER DELETE ON produk
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO produk_bc 
+    SET id=OLD.id, 
+    kode_produk=OLD.kode_produk,
+    nama_produk=OLD.nama_produk,
+    harga=OLD.harga;
+END$$
+DELIMITER ;
+```
+
 ---
 
 ```
