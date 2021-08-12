@@ -37,7 +37,10 @@ ALTER TABLE `log_harga_produk` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO
 - Buat Trigger `before_produk_update`
 ```sql
 DELIMITER $$
-CREATE TRIGGER `before_produk_update` BEFORE UPDATE ON `produk` FOR EACH ROW BEGIN
+CREATE TRIGGER `before_produk_update` 
+BEFORE UPDATE ON `produk` 
+FOR EACH ROW 
+BEGIN
     INSERT INTO log_harga_produk
     set kode_produk = OLD.kode_produk,
     harga_baru=new.harga,
@@ -47,6 +50,14 @@ END
 $$
 DELIMITER ;
 ```
+- Macam-macam Trigger
+  - BEFORE INSERT – dijalankan ketika data di masukan ke dalam table.
+  - AFTER INSERT – dijalankan setelah data masuk ke dalam table.
+  - BEFORE UPDATE – dijalankan sebelum proses update data.
+  - AFTER UPDATE – dijalankan setelah proses proses update data.
+  - BEFORE DELETE – dijalankan sebelum proses delete data.
+  - AFTER DELETE – dijalankan setelah proses delete data.
+
 - Coba Trigger
 ```sql
 update produk set harga=90000 WHERE kode_produk='BR001';
